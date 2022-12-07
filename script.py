@@ -1,32 +1,85 @@
+import requests
+import json
 import os
-import github
 
-# extracting all the input from environments
-title = os.environ['INPUT_TITLE']
-token = os.environ['INPUT_TOKEN']
-labels = os.environ['INPUT_LABELS']
-assignees = os.environ['INPUT_ASSIGNEES']
-body = os.environ['INPUT_BODY']
 
-# as I said GitHub expects labels and assignees as list but we supplied as string in yaml as list are not supposed in
-# .yaml format
-if labels and labels != '':
-    labels = labels.split(',')  # splitting by , to make a list
-else:
-    labels = []  # setting empty list if we get labels as '' or None
+MERGE_PR = os.environ.get("MERGE_PR")
+CLOSE_PR = os.environ.get("CLOSE_PR")
+PR_DESCRIPTION = os.environ.get("PR_DESCRIPTION")
+BASE = os.environ.get("BASE_REF")
+HEAD = os.environ.get("HEAD_REF")
+SEP = "&&"
+token = os.environ.get("GITHUB_TOKEN")
+BASE_URI = "https://api.github.com"
+owner = os.environ.get("REPO_OWNER")
+repo = os.environ.get("REPO_NAME")
+pull_number = os.environ.get("PR_NUMBER")
 
-if assignees and assignees != '':
-    assignees = assignees.split(',')  # splitting by , to make a list
-else:
-    assignees = []  # setting empty list if we get labels as '' or None
+# BASE_URI="https://api.github.com"
+# owner="naveen-k-u-n"
+# repo="naveen-k-u-n/workflows-v2"
+# pull_number = 15
+# MERGE_PR = True
 
-github = github.Github(token)
-# GITHUB_REPOSITORY is the repo name in owner/name format in Github Workflow
-repo = github.get_repo(os.environ['GITHUB_REPOSITORY'])
 
-issue = repo.create_issue(
-    title=title,
-    body=body,
-    assignees=assignees,
-    labels=labels
-)
+def merge():
+    if MERGE_PR:
+        print("PR has Approved.")
+        # merge API
+        url = BASE_URI+"/repos/" + repo + "/pulls/" + str(pull_number) + "/merge"
+        data = json.dumps({"merged": True})
+        headers = {'Authorization': 'token '+token}
+        res = requests.put(url, data, headers=headers)
+        print("merge API status code: {}".format(res.status_code) )
+
+        #  merge API comment
+        url = BASE_URI+"/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+        data = json.dumps({"body": "Pull Request Merged!"})
+        res = requests.post(url, data, headers=headers)
+        print("merge API comment status code: {}".format(res.status_code))
+
+
+def close():
+    if CLOSE_PR:
+        print("PR has Closed manually by comments.")
+        # closed API
+        url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
+        data = json.dumps({ "state": "closed" })
+        headers = {'Authorization': 'token ' + token}
+        res = requests.patch(url, data, headers=headers)
+        print("Close API status code: {}".format(res.status_code))
+
+        # closed API comment
+        url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+        data = json.dumps({"body":"Pull Request Closed!"})
+        res = requests.post(url, data, headers=headers)
+        print("close API comment status code: {}".format(res.status_code))
+
+
+def target():
+    if BASE == 'master' and  HEAD != 'release':
+        url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
+        data = json.dumps({"state": "closed"})
+        headers = {'Authorization': 'token ' + token}
+        res = requests.patch(url, data, headers=headers)
+        print("target API status code: {}".format(res.status_code))
+
+        url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+        data = json.dumps({"body": "Do not accept PR target from feature branch to master branch.!"})
+        res = requests.post(url, data, headers=headers)
+        print("target API comment status code: {}".format(res.status_code))
+
+
+def description():
+    pass
+
+
+def main():
+    merge()
+    close()
+    target()
+    description()
+
+
+if __name__ == '__main__':
+    main()
