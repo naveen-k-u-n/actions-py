@@ -57,7 +57,7 @@ def close():
 
 
 def target():
-    if BASE == 'master' and  HEAD != 'release':
+    if BASE == 'main' and  HEAD != 'release':
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
         data = json.dumps({"state": "closed"})
         headers = {'Authorization': 'token ' + token}
