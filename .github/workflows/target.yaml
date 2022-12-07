@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Description and Target
-        uses: naveen-k-u-n/actions-py
+        uses: ./
         # with:
         #   pr_number: ${{ github.event.number }}
         #   pr_description: ${{ !github.event.pull_request.body }}
