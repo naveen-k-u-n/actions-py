@@ -19,6 +19,8 @@ jobs:
   Check-PR:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Check PR Description and Target
         uses: ./
         # with:
