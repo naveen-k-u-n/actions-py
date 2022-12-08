@@ -15,12 +15,16 @@ owner = os.environ.get("REPO_OWNER")
 repo = os.environ.get("REPO_NAME")
 pull_number = os.environ.get("PR_NUMBER")
 
+
 # BASE_URI="https://api.github.com"
 # owner="naveen-k-u-n"
 # repo="naveen-k-u-n/workflows-v2"
-# pull_number = 15
-# MERGE_PR = True
-
+# pull_number = 1
+# # MERGE_PR = False
+# # CLOSE_PR = False
+# # BASE = False
+# # HEAD = False
+# PR_DESCRIPTION = False
 
 def merge():
     if MERGE_PR:
@@ -65,13 +69,22 @@ def target():
         print("target API status code: {}".format(res.status_code))
 
         url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
-        data = json.dumps({"body": "Do not accept PR target from feature branch to master branch.!"})
+        data = json.dumps({"body": "Do not accept PR target from feature branch to master branch."})
         res = requests.post(url, data, headers=headers)
         print("target API comment status code: {}".format(res.status_code))
 
-
 def description():
-    pass
+    if PR_DESCRIPTION:
+        url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
+        data = json.dumps({"state": "closed"})
+        headers = {'Authorization': 'token ' + token}
+        res = requests.patch(url, data, headers=headers)
+        print("target API status code: {}".format(res.status_code))
+
+        url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+        data = json.dumps({"body": "No Description on PR body. Please add valid description."})
+        res = requests.post(url, data, headers=headers)
+        print("description API comment status code: {}".format(res.status_code))
 
 
 def main():
