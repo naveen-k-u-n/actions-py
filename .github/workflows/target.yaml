@@ -1,4 +1,3 @@
-
 name: 'PR Description and Target Checker'
 on:
   pull_request:
@@ -13,16 +12,16 @@ env:
   REPO_OWNER: ${{ github.repository_owner }}
   REPO_NAME: ${{ github.repository }}
   HEAD_REF: ${{ contains(github.head_ref, 'release') }}
-  BASE_REF: ${{ contains(github.base_ref, 'master') }}  
+  BASE_REF: ${{ contains(github.base_ref, 'main') }}  
       
 jobs:
   Check-PR:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Description and Target
-        uses: naveen-k-u-n/actions-py
-        # with:
-        #   pr_number: ${{ github.event.number }}
-        #   pr_description: ${{ !github.event.pull_request.body }}
-        #   repo: ${{ github.repository }}
-        #   owner: ${{ github.repository_owner }}
+        uses: naveen-k-u-n/actions-py@develop
+        with:
+          pr_number: ${{ github.event.number }}
+          pr_description: ${{ !github.event.pull_request.body }}
+          repo: ${{ github.repository }}
+          owner: ${{ github.repository_owner }}  
