@@ -15,15 +15,14 @@ owner = os.environ.get("REPO_OWNER")
 repo = os.environ.get("REPO_NAME")
 pull_number = os.environ.get("PR_NUMBER")
 
-
 # BASE_URI="https://api.github.com"
 # owner="naveen-k-u-n"
-# repo="naveen-k-u-n/workflows-v2"
-# pull_number = 1
+# repo="naveen-k-u-n/actions-py"
+# pull_number = 2
 # # MERGE_PR = False
 # # CLOSE_PR = False
-# # BASE = False
-# # HEAD = False
+# BASE = True
+# HEAD = True
 # PR_DESCRIPTION = False
 
 def merge():
@@ -61,7 +60,7 @@ def close():
 
 
 def target():
-    if BASE == 'main' and  HEAD != 'release':
+    if BASE == 'True' and  HEAD == 'False':
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
         data = json.dumps({"state": "closed"})
         headers = {'Authorization': 'token ' + token}
