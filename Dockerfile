@@ -35,6 +35,11 @@
 #Deriving the latest base image
 FROM python:latest
 
+# ADD . /app
+# WORKDIR /app
+# ENV PYTHONPATH /app
+# CMD ["/app/script.py"]
+
 #to COPY the remote file at working directory in container
 COPY script.py ./
 # Now the structure looks like this '/usr/app/src/test.py'
@@ -43,4 +48,4 @@ COPY script.py ./
 #CMD instruction should be used to run the software
 #contained by your image, along with any arguments.
 
-CMD [ "python", "./script.py"]
+CMD [ "python", "/script.py"]
