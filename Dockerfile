@@ -11,17 +11,36 @@
 
 # # ENTRYPOINT ["/entrypoint.sh"]
 
-FROM python:3-slim AS builder
-ADD . /app
-WORKDIR /app
+################# two ##############
 
-# We are installing a dependency here directly into our app source dir
-RUN pip install --target=/app requests
+# FROM python:3-slim AS builder
+# ADD . /app
+# WORKDIR /app
 
-# A distroless container image with Python and some basics like SSL certificates
-# https://github.com/GoogleContainerTools/distroless
-FROM gcr.io/distroless/python3-debian10
-COPY --from=builder /app /app
-WORKDIR /app
-ENV PYTHONPATH /app
-CMD ["/app/script.py"]
+# # We are installing a dependency here directly into our app source dir
+# RUN pip install --target=/app requests
+
+# # A distroless container image with Python and some basics like SSL certificates
+# # https://github.com/GoogleContainerTools/distroless
+# FROM gcr.io/distroless/python3-debian10
+# COPY --from=builder /app /app
+# WORKDIR /app
+# ENV PYTHONPATH /app
+# CMD ["/app/script.py"]
+
+
+
+#######################  three #############################
+
+#Deriving the latest base image
+FROM python:latest
+
+#to COPY the remote file at working directory in container
+COPY script.py ./
+# Now the structure looks like this '/usr/app/src/test.py'
+
+
+#CMD instruction should be used to run the software
+#contained by your image, along with any arguments.
+
+CMD [ "python", "./script.py"]
