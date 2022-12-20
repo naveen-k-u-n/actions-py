@@ -54,4 +54,4 @@
 FROM python:3.8-slim-buster
 WORKDIR /
 COPY script.py ./
-CMD [ "python", "script.py"]
+CMD [ "python", "/script.py"]
