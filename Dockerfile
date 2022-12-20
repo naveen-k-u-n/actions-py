@@ -13,20 +13,20 @@
 
 ################# two ##############
 
-FROM python:3-slim AS builder
-ADD . /app
-WORKDIR /app
+# FROM python:3-slim AS builder
+# ADD . /app
+# WORKDIR /app
 
-# We are installing a dependency here directly into our app source dir
-RUN pip install --target=/app requests
+# # We are installing a dependency here directly into our app source dir
+# RUN pip install --target=/app requests
 
-# A distroless container image with Python and some basics like SSL certificates
-# https://github.com/GoogleContainerTools/distroless
-FROM gcr.io/distroless/python3-debian10
-COPY --from=builder /app /app
-WORKDIR /app
-ENV PYTHONPATH /app
-CMD ["/app/script.py"]
+# # A distroless container image with Python and some basics like SSL certificates
+# # https://github.com/GoogleContainerTools/distroless
+# FROM gcr.io/distroless/python3-debian10
+# COPY --from=builder /app /app
+# WORKDIR /app
+# ENV PYTHONPATH /app
+# CMD ["/app/script.py"]
 
 
 
@@ -49,3 +49,9 @@ CMD ["/app/script.py"]
 # #contained by your image, along with any arguments.
 
 # CMD [ "python", "/script.py"]
+
+###################################
+FROM python:3.8-slim-buster
+WORKDIR /
+COPY script.py ./
+CMD [ "python", "./script.py"]
