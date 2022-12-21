@@ -13,16 +13,18 @@ CLOSE_PR = os.environ.get("CLOSE_PR")
 PR_DESCRIPTION = os.environ.get("PR_DESCRIPTION")
 BASE = os.environ.get("BASE_REF")
 HEAD = os.environ.get("HEAD_REF")
+print(BASE)
+print(HEAD)
 
 # BASE_URI="https://api.github.com"
 # owner="naveen-k-u-n"
 # repo="naveen-k-u-n/workflow-py"
 # pull_number = 5
-# MERGE_PR = False
-# CLOSE_PR = False
-# BASE = True
-# HEAD = False
-# PR_DESCRIPTION = False
+# MERGE_PR = false
+# CLOSE_PR = false
+# BASE = true
+# HEAD = false
+# PR_DESCRIPTION = false
 
 def merge():
     print("PR has Approved.")
@@ -91,7 +93,7 @@ if __name__ == '__main__':
         close()
     else:
         print('false close pr')    
-    if BASE == True and  HEAD == False:
+    if BASE.__eq__('true') and  HEAD.__eq__('false'):
         target()
     else:
         print("target is fine")    
