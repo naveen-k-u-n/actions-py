@@ -85,11 +85,11 @@ def description():
 
 if __name__ == '__main__':
     print('start')
-    if MERGE_PR == True:
+    if MERGE_PR.__eq__('true'):
         merge()
     else:
         print('false merge pr')    
-    if CLOSE_PR == True:
+    if CLOSE_PR.__eq__('true'):
         close()
     else:
         print('false close pr')    
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         target()
     else:
         print("target is fine")    
-    if PR_DESCRIPTION == True:
+    if PR_DESCRIPTION.__eq__('true'):
         description()
     else:
         print("pr description false")    
