@@ -17,63 +17,47 @@ pull_number = os.environ.get("PR_NUMBER")
 
 # BASE_URI="https://api.github.com"
 # owner="naveen-k-u-n"
-# repo="naveen-k-u-n/actions-py"
-# pull_number = 2
-# # MERGE_PR = False
-# # CLOSE_PR = False
+# repo="naveen-k-u-n/workflow-py"
+# pull_number = 5
+# MERGE_PR = False
+# CLOSE_PR = False
 # BASE = True
 # HEAD = True
-# PR_DESCRIPTION = False
+# PR_DESCRIPTION = True
 
 def merge():
-    if MERGE_PR == 'True':
-        print("PR has Approved.")
-        # merge API
-        url = BASE_URI+"/repos/" + repo + "/pulls/" + str(pull_number) + "/merge"
-        data = json.dumps({"merged": True})
-        headers = {'Authorization': 'token '+token}
-        res = requests.put(url, data, headers=headers)
-        print("merge API status code: {}".format(res.status_code) )
+    print("PR has Approved.")
+    # merge API
+    url = BASE_URI+"/repos/" + repo + "/pulls/" + str(pull_number) + "/merge"
+    data = json.dumps({"merged": True})
+    headers = {'Authorization': 'token '+token}
+    res = requests.put(url, data, headers=headers)
+    print("merge API status code: {}".format(res.status_code) )
 
-        #  merge API comment
-        url = BASE_URI+"/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
-        data = json.dumps({"body": "Pull Request Merged!"})
-        res = requests.post(url, data, headers=headers)
-        print("merge API comment status code: {}".format(res.status_code))
+    #  merge API comment
+    url = BASE_URI+"/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+    data = json.dumps({"body": "Pull Request Merged!"})
+    res = requests.post(url, data, headers=headers)
+    print("merge API comment status code: {}".format(res.status_code))
 
 
 def close():
-    if CLOSE_PR == 'True':
-        print("PR has Closed manually by comments.")
-        # closed API
-        url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
-        data = json.dumps({ "state": "closed" })
-        headers = {'Authorization': 'token ' + token}
-        res = requests.patch(url, data, headers=headers)
-        print("Close API status code: {}".format(res.status_code))
+    print("PR has Closed manually by comments.")
+    # closed API
+    url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
+    data = json.dumps({ "state": "closed" })
+    headers = {'Authorization': 'token ' + token}
+    res = requests.patch(url, data, headers=headers)
+    print("Close API status code: {}".format(res.status_code))
 
-        # closed API comment
-        url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
-        data = json.dumps({"body":"Pull Request Closed!"})
-        res = requests.post(url, data, headers=headers)
-        print("close API comment status code: {}".format(res.status_code))
+    # closed API comment
+    url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+    data = json.dumps({"body":"Pull Request Closed!"})
+    res = requests.post(url, data, headers=headers)
+    print("close API comment status code: {}".format(res.status_code))
 
 
 def target():
-    if BASE == 'True' and  HEAD == 'False':
-        url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
-        data = json.dumps({"state": "closed"})
-        headers = {'Authorization': 'token ' + token}
-        res = requests.patch(url, data, headers=headers)
-        print("target API status code: {}".format(res.status_code))
-
-        url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
-        data = json.dumps({"body": "Do not accept PR target from feature branch to master branch."})
-        res = requests.post(url, data, headers=headers)
-        print("target API comment status code: {}".format(res.status_code))
-
-
-def description():
     url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
     data = json.dumps({"state": "closed"})
     headers = {'Authorization': 'token ' + token}
@@ -81,22 +65,40 @@ def description():
     print("target API status code: {}".format(res.status_code))
 
     url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
+    data = json.dumps({"body": "Do not accept PR target from feature branch to master branch."})
+    res = requests.post(url, data, headers=headers)
+    print("target API comment status code: {}".format(res.status_code))
+
+
+def description():
+    url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
+    data = json.dumps({"state": "closed"})
+    headers = {'Authorization': 'token ' + token}
+    res = requests.patch(url, data, headers=headers)
+    print(f"target API status code: {res}")
+
+    url = BASE_URI + "/repos/" + repo + "/issues/" + str(pull_number) + "/comments"
     data = json.dumps({"body": "No Description on PR body. Please add valid description."})
     res = requests.post(url, data, headers=headers)
-    print("description API comment status code: {}".format(res.status_code))
-    
+    print(f"description API comment status code: {res}")
 
 
-if PR_DESCRIPTION == 'True':
-    description()
-# def main():
-#     merge()
-#     close()
-#     target()
-#     description()
-
-
-# if __name__ == '__main__':
-#     print('start')
-#     main()
-#     print('end')
+if __name__ == '__main__':
+    print('start')
+    if MERGE_PR == 'True':
+        merge()
+    else:
+        print('false merge pr')    
+    if CLOSE_PR == 'True':
+        close()
+    else:
+        print('false close pr')    
+    if BASE == True and  HEAD == False:
+        target()
+    else:
+        print("target is fine")    
+    if PR_DESCRIPTION == True:
+        description()
+    else:
+        print("pr description false")    
+    print('end')
