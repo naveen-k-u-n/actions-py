@@ -85,11 +85,11 @@ def description():
 
 if __name__ == '__main__':
     print('start')
-    if MERGE_PR == 'True':
+    if MERGE_PR == True:
         merge()
     else:
         print('false merge pr')    
-    if CLOSE_PR == 'True':
+    if CLOSE_PR == True:
         close()
     else:
         print('false close pr')    
