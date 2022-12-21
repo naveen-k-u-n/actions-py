@@ -43,7 +43,7 @@ def merge():
 
 
 def close():
-    if CLOSE_PR == 'True'
+    if CLOSE_PR == 'True':
         print("PR has Closed manually by comments.")
         # closed API
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
