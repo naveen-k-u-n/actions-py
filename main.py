@@ -60,7 +60,7 @@ def close():
 
 
 def target():
-    if BASE == 'True' and  HEAD == 'False':
+    if BASE is True and  HEAD is False:
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
         data = json.dumps({"state": "closed"})
         headers = {'Authorization': 'token ' + token}
@@ -73,7 +73,7 @@ def target():
         print("target API comment status code: {}".format(res.status_code))
 
 def description():
-    if PR_DESCRIPTION == 'True':
+    if PR_DESCRIPTION is True:
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
         data = json.dumps({"state": "closed"})
         headers = {'Authorization': 'token ' + token}
@@ -84,16 +84,17 @@ def description():
         data = json.dumps({"body": "No Description on PR body. Please add valid description."})
         res = requests.post(url, data, headers=headers)
         print("description API comment status code: {}".format(res.status_code))
+    else: 
+        print('description: condition failed')
+
+def main():
+    merge()
+    close()
+    target()
+    description()
 
 
-# def main():
-#     merge()
-#     close()
-#     target()
-#     description()
-
-
-# if __name__ == '__main__':
-#     print('start')
-#     main()
-#     print('end')
+if __name__ == '__main__':
+    print('start')
+    main()
+    print('end')
