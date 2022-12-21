@@ -26,7 +26,7 @@ pull_number = os.environ.get("PR_NUMBER")
 # PR_DESCRIPTION = False
 
 def merge():
-    if MERGE_PR is True:
+    if MERGE_PR:
         print("PR has Approved.")
         # merge API
         url = BASE_URI+"/repos/" + repo + "/pulls/" + str(pull_number) + "/merge"
@@ -43,7 +43,7 @@ def merge():
 
 
 def close():
-    if CLOSE_PR is True:
+    if CLOSE_PR:
         print("PR has Closed manually by comments.")
         # closed API
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
@@ -73,7 +73,7 @@ def target():
         print("target API comment status code: {}".format(res.status_code))
 
 def description():
-    if PR_DESCRIPTION is True:
+    if PR_DESCRIPTION == True:
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
         data = json.dumps({"state": "closed"})
         headers = {'Authorization': 'token ' + token}
@@ -85,7 +85,7 @@ def description():
         res = requests.post(url, data, headers=headers)
         print("description API comment status code: {}".format(res.status_code))
     else: 
-        print('description: condition failed')
+        print('description: condition')
 
 def main():
     merge()
