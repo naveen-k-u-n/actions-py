@@ -26,7 +26,7 @@ pull_number = os.environ.get("PR_NUMBER")
 # PR_DESCRIPTION = False
 
 def merge():
-    if MERGE_PR:
+    if MERGE_PR is True:
         print("PR has Approved.")
         # merge API
         url = BASE_URI+"/repos/" + repo + "/pulls/" + str(pull_number) + "/merge"
@@ -43,7 +43,7 @@ def merge():
 
 
 def close():
-    if CLOSE_PR:
+    if CLOSE_PR is True:
         print("PR has Closed manually by comments.")
         # closed API
         url = BASE_URI + "/repos/" + repo + "/pulls/" + str(pull_number)
