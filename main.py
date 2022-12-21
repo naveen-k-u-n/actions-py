@@ -86,14 +86,14 @@ def description():
         print("description API comment status code: {}".format(res.status_code))
 
 
-def main():
-    merge()
-    close()
-    target()
-    description()
+# def main():
+#     merge()
+#     close()
+#     target()
+#     description()
 
 
-if __name__ == '__main__':
-    print('start')
-    main()
-    print('end')
+# if __name__ == '__main__':
+#     print('start')
+#     main()
+#     print('end')
