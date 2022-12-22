@@ -12,7 +12,7 @@ env:
   REPO_OWNER: ${{ github.repository_owner }}
   REPO_NAME: ${{ github.repository }}
   HEAD_REF: ${{ contains(github.head_ref, 'release') }}
-  BASE_REF: ${{ contains(github.base_ref, 'main') }}  
+  BASE_REF: ${{ contains(github.base_ref, 'master') }}  
       
 jobs:
   Check-PR:
