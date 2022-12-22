@@ -13,8 +13,6 @@ CLOSE_PR = os.environ.get("CLOSE_PR")
 PR_DESCRIPTION = os.environ.get("PR_DESCRIPTION")
 BASE = os.environ.get("BASE_REF")
 HEAD = os.environ.get("HEAD_REF")
-print(BASE)
-print(HEAD)
 
 # BASE_URI="https://api.github.com"
 # owner="naveen-k-u-n"
