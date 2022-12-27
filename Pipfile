@@ -5,3 +5,6 @@ name = 'pypi'
 
 [packages]
 requests = '*'
+
+[dev-packages]
+pytest = "*"
