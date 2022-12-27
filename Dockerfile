@@ -8,5 +8,5 @@ RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
 # RUN pipenv run python
 
 # WORKDIR /
-COPY main.py ./
-CMD [ "python", "/main.py"]
+COPY test.py ./
+CMD [ "python", "/test.py"]
