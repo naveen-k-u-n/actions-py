@@ -6,13 +6,13 @@ from github import Github
 access_token = os.environ.get("GITHUB_TOKEN")
 g = Github(access_token)
 repo_name = os.environ.get("REPO_NAME")
-PR_NUMBER = os.environ.get("PR_NUMBER")
+pull_number = os.environ.get("PR_NUMBER")
 
 # repo_name = 'naveen-k-u-n/workflow-py'
 # PR_NUMBER = 6
 
 repo = g.get_repo(repo_name)
-pr = repo.get_pull(PR_NUMBER)
+pr = repo.get_pull(pull_number)
 
 
 def merge():
