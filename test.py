@@ -9,11 +9,23 @@ repo_name = os.environ.get("REPO_NAME")
 pull_number = os.environ.get("PR_NUMBER")
 
 # repo_name = 'naveen-k-u-n/workflow-py'
-# PR_NUMBER = 6
+# pull_number = 7
 
 repo = g.get_repo(repo_name)
 pr = repo.get_pull(pull_number)
 
+# values
+MERGE_PR = os.environ.get("MERGE_PR")
+CLOSE_PR = os.environ.get("CLOSE_PR")
+PR_DESCRIPTION = os.environ.get("PR_DESCRIPTION")
+BASE = os.environ.get("BASE_REF")
+HEAD = os.environ.get("HEAD_REF")
+
+# MERGE_PR = "false"
+# CLOSE_PR = "false"
+# BASE = "true"
+# HEAD = "false"
+# PR_DESCRIPTION = "true"
 
 def merge():
     print("PR has Approved.")
