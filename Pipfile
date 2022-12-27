@@ -1,11 +1,11 @@
 [[source]]
-url = "https://pypi.python.org/simple"
+url = 'https://pypi.python.org/simple'
 verify_ssl = true
-name = "pypi"
+name = 'pypi'
+
+[requires]
+python_version = '2.7'
 
 [packages]
+requests = { extras = ['socks'] }
 requests = "*"
-
-
-[dev-packages]
-pytest = "*"
