@@ -12,7 +12,7 @@ pull_number = os.environ.get("PR_NUMBER")
 # pull_number = 7
 
 repo = g.get_repo(repo_name)
-pr = repo.get_pull(pull_number)
+# pr = repo.get_pull(pull_number)
 
 # values
 MERGE_PR = os.environ.get("MERGE_PR")
