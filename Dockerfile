@@ -7,6 +7,6 @@ RUN python -m pip install --upgrade pip
 RUN pip install pipenv && pipenv install --dev --system --deploy --ignore-pipfile
 # RUN pipenv run python
 
-# WORKDIR /
+WORKDIR /
 COPY main.py ./
 CMD [ "python", "/main.py"]
