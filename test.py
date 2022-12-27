@@ -12,7 +12,7 @@ pull_number = os.environ.get("PR_NUMBER")
 # pull_number = 7
 
 repo = g.get_repo(repo_name)
-# pr = repo.get_pull(pull_number)
+pr = repo.get_pull(pull_number.numner)
 
 # values
 MERGE_PR = os.environ.get("MERGE_PR")
@@ -20,6 +20,9 @@ CLOSE_PR = os.environ.get("CLOSE_PR")
 PR_DESCRIPTION = os.environ.get("PR_DESCRIPTION")
 BASE = os.environ.get("BASE_REF")
 HEAD = os.environ.get("HEAD_REF")
+
+print(repo)
+print(pr)
 
 # MERGE_PR = "false"
 # CLOSE_PR = "false"
@@ -42,18 +45,17 @@ def close():
     pr.create_issue_comment('Pull Request Closed!')
 
 def target():
+    # API comment
+    pr.create_issue_comment('Do not accept PR target from feature branch to master branch.')
     # closed API
     pr.edit(state='closed')
-    # closed API comment
-    pr.create_issue_comment('Do not accept PR target from feature branch to master branch.')
 
 
 def description():
+    # API comment
+    pr.create_issue_comment('No Description on PR body. Please add valid description.')
     # closed API
     pr.edit(state='closed')
-    # closed API comment
-    pr.create_issue_comment('No Description on PR body. Please add valid description.')
-
 
 if __name__ == '__main__':
     print('start')
@@ -66,5 +68,3 @@ if __name__ == '__main__':
     if PR_DESCRIPTION.__eq__('true'):
         description() 
     print('end')
-    print(repo)
-    print(pr)
