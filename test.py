@@ -6,7 +6,8 @@ from github import Github
 access_token = os.environ.get("GITHUB_TOKEN")
 g = Github(access_token)
 repo_name = os.environ.get("REPO_NAME")
-pull_number = os.environ.get("PR_NUMBER")
+pull_number = int(os.environ.get("PR_NUMBER"))
+
 
 # repo_name = 'naveen-k-u-n/workflow-py'
 # pull_number = 7
