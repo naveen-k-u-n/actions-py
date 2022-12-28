@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from github import Github
+import Github
 
 access_token = os.environ.get("GITHUB_TOKEN")
 g = Github(access_token)

@@ -4,7 +4,7 @@ from github import Github
 g = Github(access_token)
 
 repo_name = 'naveen-k-u-n/workflow-py'
-pull_number = 7
+pull_number = "7"
 
 repo = g.get_repo(repo_name)
 pr = repo.get_pull(pull_number)
