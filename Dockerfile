@@ -5,7 +5,7 @@ COPY main.py ./
 # Install & use pipenv
 COPY Pipfile Pipfile.lock ./
 RUN python -m pip install --upgrade pip
-RUN pip install pipenv
+RUN pip install pipenv --system --deploy --ignore-pipfile
 RUN pip install PyGithub && pipenv run python main.py
 # RUN pipenv run python main.py
 
