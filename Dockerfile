@@ -9,8 +9,8 @@ RUN pip install PyGithub
 
 WORKDIR /app
 COPY main.py ./app
-# CMD [ "python", "/main.py"]
-RUN pipenv run python main.py
+CMD [ "python", "/app/main.py"]
+# RUN pipenv run python main.py
 
 
 # RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
