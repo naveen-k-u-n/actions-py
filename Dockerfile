@@ -9,7 +9,8 @@ RUN pip install PyGithub
 
 WORKDIR /
 COPY main.py ./
-CMD [ "python", "/main.py"]
+# CMD [ "python", "/main.py"]
+CMD ["pipenv", "run", "python", "main.py"]
 # RUN pipenv run python main.py
 
 
