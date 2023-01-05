@@ -10,8 +10,8 @@ RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
 
 WORKDIR /
 COPY main.py ./
-# CMD [ "python", "/main.py"]
-CMD ["pipenv", "run", "python", "/main.py"]
+CMD [ "python", "/main.py"]
+# CMD ["pipenv", "run", "python", "/main.py"]
 # RUN pipenv run python main.py
 
 
