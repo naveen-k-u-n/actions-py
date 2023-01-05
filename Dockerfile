@@ -7,10 +7,10 @@ RUN pip install pipenv
 RUN pip install PyGithub
 
 
-WORKDIR /app
-COPY main.py ./app
-CMD [ "python", "/main.py"]
-# RUN pipenv run python main.py
+WORKDIR /
+COPY main.py ./
+# CMD [ "python", "/main.py"]
+RUN pipenv shell && pipenv run python main.py
 
 
 # RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
