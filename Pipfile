@@ -10,4 +10,4 @@ pygithub = "*"
 pylint = "*"
 
 [requires]
-python_version = ""
+python_version = "*"
