@@ -11,5 +11,5 @@ RUN pipenv install PyGithub
 
 COPY main.py ./
 # CMD [ "python", "/main.py"]
-CMD ["pipenv", "run", "python", "/main.py"]
-# RUN pipenv run python main.py
+# CMD ["pipenv", "run", "python", "/main.py"]
+RUN pipenv run python main.py
