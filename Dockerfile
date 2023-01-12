@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3
 # WORKDIR /
 ENV WORKON_HOME /root
 ENV PIPENV_PIPFILE /Pipfile
