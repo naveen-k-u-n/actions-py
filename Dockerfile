@@ -1,8 +1,8 @@
 FROM python:3.8-slim-buster
 
 COPY Pipfile Pipfile.lock ./
-RUN python3 -m pip install --upgrade pip
-RUN apt-get install -y python3-pip
+RUN python -m pip install --upgrade pip
+# RUN apt-get install -y python3-pip
 RUN pip install pipenv
 ENTRYPOINT ["echo $GITHUB_SHA"]
 
