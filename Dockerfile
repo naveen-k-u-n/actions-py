@@ -22,8 +22,9 @@
 FROM python:3.6
 
 COPY Pipfile Pipfile.lock ./
-RUN pip install --upgrade pip && \
-    pip install pipenv
+RUN python -m pip install --upgrade pip
+RUN pip install pipenv
+COPY main.py ./
 
 ENV PIPENV_VENV_IN_PROJECT=true
 
