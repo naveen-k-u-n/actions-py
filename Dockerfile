@@ -25,11 +25,9 @@ COPY Pipfile.lock ./
 ENV WORKON_HOME /root
 ENV PIPENV_PIPFILE /Pipfile
 
-# https://github.com/pypa/pipenv/issues/4273
-# RUN pip install 'pipenv==2018.11.26'
-# RUN pipenv install --deploy
 RUN python -m pip install --upgrade pip
 RUN pip install pipenv
+RUN pipenv install --system
 
 ENTRYPOINT ["pipenv", "run", "python", "/main.py"]
 
