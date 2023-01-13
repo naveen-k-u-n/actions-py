@@ -31,5 +31,5 @@ ENV PIPENV_PIPFILE /Pipfile
 RUN python -m pip install --upgrade pip
 RUN pip install pipenv
 
-ENTRYPOINT ["pipenv", "run", "python", "./main.py"]
+ENTRYPOINT ["pipenv", "run", "python", "main.py"]
 
