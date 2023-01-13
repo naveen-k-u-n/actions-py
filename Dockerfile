@@ -9,7 +9,7 @@ RUN python3 -m pip install --upgrade pip
 RUN apt-get update && apt-get install -y python3-pip
 RUN pip install pipenv
 ENV PIPENV_PIPFILE /Pipfile
-RUN pipenv install PyGithub
+# RUN pipenv install PyGithub
 # RUN pip3 install PyGithub
 
 COPY main.py ./
