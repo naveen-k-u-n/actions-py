@@ -27,7 +27,7 @@ ENV PIPENV_PIPFILE /Pipfile
 
 # https://github.com/pypa/pipenv/issues/4273
 RUN pip install 'pipenv==2018.11.26'
-RUN pipenv install --deploy --ignore-pipfile
+RUN pipenv install
 
 ENTRYPOINT ["pipenv", "run", "python", "./main.py"]
 
