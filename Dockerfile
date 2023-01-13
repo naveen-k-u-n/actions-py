@@ -18,9 +18,9 @@
 FROM python:3
 
 
-COPY main.py /
-COPY Pipfile /
-COPY Pipfile.lock /
+COPY main.py ./
+COPY Pipfile ./
+COPY Pipfile.lock ./
 
 ENV WORKON_HOME /root
 ENV PIPENV_PIPFILE /Pipfile
@@ -31,5 +31,5 @@ ENV PIPENV_PIPFILE /Pipfile
 RUN python -m pip install --upgrade pip
 RUN pip install pipenv
 
-ENTRYPOINT ["pipenv", "run", "python", "main.py"]
+ENTRYPOINT ["pipenv", "run", "python", "/main.py"]
 
