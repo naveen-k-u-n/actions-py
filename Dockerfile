@@ -7,6 +7,7 @@ COPY Pipfile Pipfile.lock ./
 RUN python -m pip install --upgrade pip
 # RUN apt-get install -y python3-pip
 RUN pip install pipenv
+RUN pipenv install --system
 
 COPY main.py ./
 CMD ["pipenv", "run", "python", "/main.py"]
