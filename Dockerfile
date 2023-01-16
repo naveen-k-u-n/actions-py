@@ -3,6 +3,7 @@ RUN pip install pipenv
 WORKDIR /app
 COPY Pipfile* /app/
 COPY main.py /app/
+RUN pipenv lock
 RUN pipenv install --system
 
 CMD ["pipenv", "run", "python", "/app/main.py"]
