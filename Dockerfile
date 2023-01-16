@@ -1,10 +1,11 @@
-FROM python:3.8-slim-buster
+FROM python:3.6.5
+RUN pip install pipenv
+WORKDIR /app
+COPY Pipfile* /app/
+COPY main.py /app/
+RUN pipenv install
 
-COPY Pipfile Pipfile.lock ./
-RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --system --deploy
+CMD ["pipenv", "run", "python", "/app/main.py"]
 
-COPY main.py ./
-CMD ["pipenv", "run", "python", "/main.py"]
 
 
