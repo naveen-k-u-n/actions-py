@@ -1,16 +1,12 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+FROM python:3.6.5
+RUN pip install pipenv
+WORKDIR /app
+COPY Pipfile* /app/
+COPY main.py /app/
+RUN pipenv install
 
-[dev-packages]
+CMD ["pipenv", "run", "python", "/app/main.py"]
 
-[packages]
-pygithub = "*"
-PyGithub = "*"
-
-[requires]
-python_version = "3.6"
 
 
 
