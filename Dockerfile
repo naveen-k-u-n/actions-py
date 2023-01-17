@@ -6,13 +6,14 @@ RUN pip install pipenv
 COPY Pipfile ./
 COPY main.py ./
 RUN pipenv lock && pipenv --clear && pipenv --rm
-RUN pipenv install PyGithub
-#RUN pipenv install --system --deploy
+#RUN pipenv install PyGithub
+RUN pipenv install --system --deploy
 
 RUN which python
-Run python --version
-Run pip --version
-Run pipenv run pip list
+RUN python --version
+RUN pip --version
+RUN pipenv run pip list
+RUN pipenv run python main.py
 
 CMD ["pipenv", "run", "python", "/main.py"]
 
