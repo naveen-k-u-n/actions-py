@@ -6,9 +6,8 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-pygithub = "*"
-PyGithub = "*"
+PyGithub = "==1.57"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
 
