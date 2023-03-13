@@ -5,10 +5,11 @@ from datetime import datetime, timedelta
 #access_token = os.environ.get("GITHUB_TOKEN")
 #g = Github(access_token)
 #repo_name = os.environ.get("REPO_NAME")
+#pull_number = int(os.environ.get("PR_NUMBER"))
 
 g = Github(os.environ["GITHUB_TOKEN"])
 repo = os.environ.get("REPO_NAME")
-pulls = repo.get_pulls(state='open')
+pulls = int(repo.get_pulls(state='open'))
 
 print("repo_name:",repo)
 print("pulls:",pulls)
