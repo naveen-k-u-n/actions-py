@@ -2,8 +2,12 @@ import os
 from github import Github
 from datetime import datetime, timedelta
 
+#access_token = os.environ.get("GITHUB_TOKEN")
+#g = Github(access_token)
+#repo_name = os.environ.get("REPO_NAME")
+
 g = Github(os.environ["GITHUB_TOKEN"])
-repo = g.get_repo("owner/repo")
+repo = os.environ.get("REPO_NAME")
 pulls = repo.get_pulls(state='open')
 
 print("repo_name:",repo)
