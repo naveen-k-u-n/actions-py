@@ -2,14 +2,25 @@ import os
 from github import Github
 from datetime import datetime, timedelta
 
+# get the pull request number and repository name
+pr_number = os.environ["PR_NUMBER"]
+repo_name = os.environ["GITHUB_REPOSITORY"]
+
+# create a PyGithub instance using the GitHub token
+g = Github(os.environ["GITHUB_TOKEN"])
+
+# get the pull request object
+repo = g.get_repo(repo_name)
+pr = repo.get_pull(pr_number)
+
 #access_token = os.environ.get("GITHUB_TOKEN")
 #g = Github(access_token)
 #repo_name = os.environ.get("REPO_NAME")
 #pull_number = int(os.environ.get("PR_NUMBER"))
 
-g = Github(os.environ["GITHUB_TOKEN"])
-repo = os.environ.get("REPO_NAME")
-pulls = int(repo.get_pulls(state='open'))
+#g = Github(os.environ["GITHUB_TOKEN"])
+#repo = os.environ.get("REPO_NAME")
+pulls = repo.get_pulls(state='open')
 
 print("repo_name:",repo)
 print("pulls:",pulls)
