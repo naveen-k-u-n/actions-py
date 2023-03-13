@@ -3,7 +3,8 @@ from github import Github
 from datetime import datetime, timedelta
 
 # get the pull request number and repository name
-pr_number = os.environ["PR_NUMBER"]
+#pr_number = os.environ["PR_NUMBER"]
+pull_number = int(os.environ.get("PR_NUMBER"))
 repo_name = os.environ["GITHUB_REPOSITORY"]
 
 # create a PyGithub instance using the GitHub token
@@ -11,7 +12,7 @@ g = Github(os.environ["GITHUB_TOKEN"])
 
 # get the pull request object
 repo = g.get_repo(repo_name)
-pr = repo.get_pull(pr_number)
+pr = repo.get_pull(pull_number)
 
 #access_token = os.environ.get("GITHUB_TOKEN")
 #g = Github(access_token)
