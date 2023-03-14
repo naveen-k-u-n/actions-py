@@ -30,7 +30,7 @@ for pr in pulls:
     # calculate the time difference between the last update of the pull request and the current date
     time_diff = now - pr.updated_at
     # check if the time difference is greater than the stale days
-    if time_diff > timedelta(days=stale_days):
+    if time_diff > timedelta(days=stale_no_days):
         print("Pull request", pr.number, "is stale!")
         pr.create_issue_comment('This PR is stale because it has been open 15 days with no activity. Remove stale label or comment or this will be closed in 2 days.')
         pr.add_to_labels('Stale')
@@ -44,7 +44,7 @@ for pr in pulls:
         # calculate the time difference between the last update of the pull request and the current date
         time_diff = now - pr.updated_at
         # check if the time difference is greater than the stale days
-        if time_diff > timedelta(days=stale_close_days):
+        if time_diff > timedelta(days=stale_no_close_days):
             print("Pull request", pr.number, "is stale and closed!")
             # close the pull request
             pr.edit(state="closed")

@@ -40,7 +40,7 @@ inputs:
   stale_days:
     description: stale pr
     required: false  
-  close_days:
+  stale_close_days:
     description: close stale pr
     required: false    
     
