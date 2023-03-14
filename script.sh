@@ -1,4 +1,4 @@
 #!/bin/bash
 pip install pipenv
 pipenv install
-pipenv run python stale.py
+pipenv run python test.py
