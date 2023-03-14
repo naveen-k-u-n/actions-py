@@ -9,16 +9,18 @@ pr_number = int(os.environ.get("PR_NUMBER"))
 repo = g.get_repo(repo_name)
 pr = repo.get_pull(pr_number)
 pulls = repo.get_pulls(state='open')
-stale_days = int(os.environ.get("STALE_DAYS"))
-stale_close_days = int(os.environ.get("STALE_CLOSE_DAYS"))
+stale_days = os.environ.get('STALE_DAYS')
+stale_close_days = os.environ.get('STALE_CLOSE_DAYS')
 
 print("repo_name_wf:",repo_name)
 print("pr-num-wf:",pr_number)
 print("repo_name:",repo)
 print("pr_number:",pr.number)
 print("pulls:",pulls)
-print("stale_days:",stale_days)
-print("stale_close_days:",stale_close_days)
+# print("stale_days:",stale_days)
+# print("stale_close_days:",stale_close_days)
+print(f'STALE_DAYS = {stale_days}')
+print(f'STALE_CLOSE_DAYS = {stale_close_days}')
 
 
 # define the number of days after which a pull request is considered stale
