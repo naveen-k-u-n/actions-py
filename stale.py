@@ -23,7 +23,7 @@ print("pr_number:",pr.number)
 print("pulls:",pulls)
 
 # Add "Stale" label to the PR if no active from 15 days
-stale_days = 15
+stale_days = 7
 now = datetime.now()
 for pr in pulls:
     time_diff = now - pr.updated_at
