@@ -3,7 +3,7 @@ from github import Github
 from datetime import datetime, timedelta
 
 # access_token = "${{ secrets.GITHUB_TOKEN }}"
-access_token = os.getenv('PAT_TOKEN')
+access_token = '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'
 
 # create a Github object using the access token
 g = Github(access_token)
