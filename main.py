@@ -8,7 +8,9 @@ access_token = "${{ secrets.GITHUB_TOKEN }}"
 g = Github(access_token)
 # env values
 # g = Github(os.environ["GITHUB_TOKEN"])
-repo = g.get_repo(os.environ['REPO_NAME'])
+repo = os.getenv('REPO_NAME')
+# repo = g.get_repo(repo_name)
+# repo = g.get_repo(os.environ['REPO_NAME'])
 pulls = repo.get_pulls(state='open')
 MERGE_PR = os.environ.get("MERGE_PR")
 CLOSE_PR = os.environ.get("CLOSE_PR")
